@@ -47,7 +47,7 @@ public class Circulo extends Figura {
 
 	protected void dibujarFigura(int linea) {
 
-		int espaciosiniciales = ((tamaño / 2) + 1) / 2;
+		int espaciosiniciales = ((altura / 2) + 1) / 2;
 
 		int espacios;
 
@@ -59,7 +59,7 @@ public class Circulo extends Figura {
 
 			espacios = espaciosiniciales - (linea - 1);
 
-			asteriscos = tamaño - 2 * espacios;
+			asteriscos = altura - 2 * espacios;
 
 			// Dibujamos los espacios y "asteriscos" correspondientes.
 
@@ -151,11 +151,11 @@ public class Circulo extends Figura {
 
 		// Si estamos en la mitad del circulo, llenamos la linea de "asteriscos"
 
-		else if (linea > espaciosiniciales && linea < (tamaño - espaciosiniciales)) {
+		else if (linea > espaciosiniciales && linea < (altura - espaciosiniciales)) {
 
 			espacios = 0;
 
-			asteriscos = tamaño;
+			asteriscos = altura;
 
 			for (int i = 0; i < asteriscos; i++) {
 
@@ -189,11 +189,11 @@ public class Circulo extends Figura {
 
 		// Si estamos en el último tercio del círculo...
 
-		else if (linea >= (tamaño - espaciosiniciales) && linea <= tamaño) {
+		else if (linea >= (altura - espaciosiniciales) && linea <= altura) {
 
-			espacios = espaciosiniciales - (tamaño - linea);
+			espacios = espaciosiniciales - (altura - linea);
 
-			asteriscos = tamaño - 2 * espacios;
+			asteriscos = altura - 2 * espacios;
 
 			// Dibujamos los espacios y "asteriscos" correspondientes.
 

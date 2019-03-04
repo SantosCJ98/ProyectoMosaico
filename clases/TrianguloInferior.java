@@ -4,7 +4,7 @@ import static colores.Colores.*;
 
 import colores.ColoresEnum;
 
-/**Esta clase crea rombos.
+/**Esta clase crea triangulos inferiores.
  * @author Santos CJ
  * @version 1.0
  * @since 1.0
@@ -47,11 +47,11 @@ public class TrianguloInferior extends Figura {
 
 	// Método que dibuja un triángulo inferior (según la línea)
 
-	public void dibujarFigura(int linea) {
+	protected void dibujarFigura(int linea) {
 
 		int fondos = linea - 1;
 
-		int triangulo = tamaño - fondos;
+		int triangulo = altura - fondos;
 
 		for (int i = 0; i < fondos; i++) {
 

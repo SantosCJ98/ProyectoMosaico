@@ -2,15 +2,27 @@ package clases;
 
 import static teclado.Teclado.*;
 
+/**Esta clase es para crear el menu del programa de creacion, visualizacion y clonacion de mosaicos.
+ * @author Santos CJ
+ * @version 1.0
+ * @since 1.0
+ * 
+ */
 public class Menu {
 
+	/**
+	 * Mosaico actual.
+	 */
 	private Mosaico mosaico = new Mosaico();
 
+	/**
+	 * Accion elegida por el usuario.
+	 */
 	private static int opcion;
 
-	// Menu del programa con 4 opciones. (1 = Crear mosaico. 2 = Mostrar mosaico. 3
-	// = Clonar Mosaico. 4 = Salir)
-
+	/**
+	 * Menu principal
+	 */
 	public void menu_principal() {
 
 		System.out.println("Esto es un programa para crear mosaicos");
@@ -51,9 +63,9 @@ public class Menu {
 
 	}
 
-	// Método que da a elegir entre crear un mosaico de forma manual o
-	// aleatoriamente.
-
+	/**Submenu que da elegir al usuario entre crear un mosaico manualmente o aleatoriamente.
+	 * @return res
+	 */
 	private Figura[][] crear_mosaico() {
 
 		Figura[][] res = null;

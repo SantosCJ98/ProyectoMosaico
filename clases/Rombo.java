@@ -49,15 +49,15 @@ public class Rombo extends Figura {
 
 	// Metodo que dibuja un rombo (según la linea)
 
-	public void dibujarFigura(int linea) {
+	protected void dibujarFigura(int linea) {
 
-		int fondos = (tamaño - linea * 2 - 1) / 2;
+		int fondos = (altura - linea * 2 - 1) / 2;
 
 		int rombo = linea * 2 - 1;
 
 		// Si estamos en la mitad superior, pintamos una pirámide superior.
 
-		if (linea <= tamaño / 2) {
+		if (linea <= altura / 2) {
 			for (int i = 0; i <= fondos; i++) {
 
 				if (fondo.equals(ColoresEnum.NEGRO)) {
@@ -146,10 +146,10 @@ public class Rombo extends Figura {
 
 		// Si estamos en la mitad, lo llenamos todo de "asteriscos"
 
-		else if (linea == tamaño / 2 + 1)
+		else if (linea == altura / 2 + 1)
 
 		{
-			for (int i = 0; i < tamaño; i++) {
+			for (int i = 0; i < altura; i++) {
 				if (colorfigura.equals(ColoresEnum.ROJO)) {
 
 					System.out.print(FONDO_ROJO + "   " + RESET);
@@ -182,7 +182,7 @@ public class Rombo extends Figura {
 
 		else {
 
-			for (int i = 0; i < (tamaño - ((tamaño - linea) * 2 + 1)) / 2; i++) {
+			for (int i = 0; i < (altura - ((altura - linea) * 2 + 1)) / 2; i++) {
 
 				if (fondo.equals(ColoresEnum.NEGRO)) {
 
@@ -210,7 +210,7 @@ public class Rombo extends Figura {
 
 			}
 
-			for (int i = 0; i < (tamaño - linea) * 2 + 1; i++) {
+			for (int i = 0; i < (altura - linea) * 2 + 1; i++) {
 
 				if (colorfigura.equals(ColoresEnum.ROJO)) {
 
@@ -238,7 +238,7 @@ public class Rombo extends Figura {
 
 			}
 
-			for (int i = 0; i < (tamaño - ((tamaño - linea) * 2 + 1)) / 2; i++) {
+			for (int i = 0; i < (altura - ((altura - linea) * 2 + 1)) / 2; i++) {
 
 				if (fondo.equals(ColoresEnum.NEGRO)) {
 

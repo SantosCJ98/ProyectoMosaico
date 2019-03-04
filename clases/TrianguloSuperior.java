@@ -4,7 +4,7 @@ import static colores.Colores.*;
 
 import colores.ColoresEnum;
 
-/**Esta clase crea rombos.
+/**Esta clase crea triangulos superiores.
  * @author Santos CJ
  * @version 1.0
  * @since 1.0
@@ -49,11 +49,11 @@ public class TrianguloSuperior extends Figura {
 
 	// Método que dibuja un triángulo superior (según la línea)
 
-	public void dibujarFigura(int linea) {
+	protected void dibujarFigura(int linea) {
 
 		int triangulo = linea;
 
-		int fondos = Math.abs(triangulo - tamaño);
+		int fondos = Math.abs(triangulo - altura);
 
 		for (int i = 0; i < triangulo; i++) {
 

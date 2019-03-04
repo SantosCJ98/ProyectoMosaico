@@ -57,13 +57,13 @@ public class Cruz extends Figura {
 
 	// Método que dibuja una cruz. (Según la linea).  
 
-	public void dibujarFigura(int linea) {
+	protected void dibujarFigura(int linea) {
 
 		int fondos = 2;
 
-		int cruz = tamaño - 2 - 2;
+		int cruz = altura - 2 - 2;
 
-		if ((linea - 1 == 0 || linea - 1 == 1) || (linea - 1 == tamaño - 2 || linea - 1 == tamaño - 1)) {
+		if ((linea - 1 == 0 || linea - 1 == 1) || (linea - 1 == altura - 2 || linea - 1 == altura - 1)) {
 
 			for (int i = 0; i < fondos; i++) {
 

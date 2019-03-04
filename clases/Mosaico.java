@@ -2,40 +2,85 @@ package clases;
 
 import static teclado.Teclado.*;
 
+import java.util.Arrays;
 import java.util.Random;
 
+/**Esta clase se utiliza para crear mosaicos.
+ * @author Santos CJ
+ * @version 1.0
+ * @since 1.0
+ *
+ */
 public class Mosaico {
 
+	/**
+	 * Mosaico de figuras
+	 */
 	private Figura[][] mosaico;
 
+	/**
+	 * Numero de filas
+	 */
 	private int filas;
 
+	/**
+	 * Numero de columnas.
+	 */
 	private int columnas;
+	
+	/**
+	 * Conjunto de figuras
+	 */
+	private Figura[] figuras;
 
 	// Constructores
 
+	/**
+	 * Constructor por defecto
+	 */
 	Mosaico() {
 
 	}
 
-	private Mosaico(int filas, int columnas, Figura[][] mosaico) {
+	/**
+	 * Constructor a partir de las filas, columnas y el mosaico.
+	 * @param filas Numero de filas
+	 * @param columnas Numero de columnas
+	 * @param mosaico Mosaico de figuras
+	 * @param figuras Conjunto de figuras seleccionadas
+	 */
+	private Mosaico(int filas, int columnas, Figura[][] mosaico, Figura[] figuras) {
 
 		this.filas = filas;
 
 		this.columnas = columnas;
 
 		this.mosaico = mosaico;
+		
+		this.figuras = figuras;
+		
+		
 
 	}
 
+	/** Constructor a partir de otro mosaico
+	 * @param original Mosaico (clonado)
+	 */
 	private Mosaico(Mosaico original) {
 
-		this(original.filas, original.columnas, copiar(original.mosaico, original.filas, original.columnas));
+		this(original.filas, original.columnas, copiar(original.mosaico, original.filas, original.columnas), Arrays.copyOf(original.figuras,  original.figuras.length));
 
 	}
 
-	// Método que comprueba si un mosaico es igual a su clon
+	
 
+	/** Comprueba si un mosaico es igual a su clon.
+	 * @param mosaico (Mosaico original)
+	 * @param clon (Mosaico clonado)
+	 * @param filas (Numero de filas)
+	 * @param columnas (Numero de columnas)
+	 * @return true (Si todas las celdas son iguales)
+	 */
 	private static boolean comparar_celdas(Figura[][] mosaico, Figura[][] clon, int filas, int columnas) {
 
 		boolean celda_igual = true;
@@ -60,8 +105,13 @@ public class Mosaico {
 
 	}
 
-	// Método que copia un mosaico a otro array bidimensional.
 
+	/**Copia un mosaico a otro array bidimensional.
+	 * @param original (Mosaico original)
+	 * @param filas (Numero de filas)
+	 * @param columnas (Numero de columnas)
+	 * @return (Copia del mosaico)
+	 */
 	private static Figura[][] copiar(Figura[][] original, int filas, int columnas) {
 
 		Figura[][] copia = new Figura[filas][columnas];
@@ -108,10 +158,16 @@ public class Mosaico {
 
 	}
 
+	/**Devuelve el numero de filas.
+	 * @return filas
+	 */
 	private int getFilas() {
 		return filas;
 	}
 
+	/**Establece el numero de filas, comprendido entre 1 y 3.
+	 * @param filas Numero de filas.
+	 */
 	private void setFilas(int filas) {
 
 		if (filas < 1 && filas > 3) {
@@ -123,10 +179,16 @@ public class Mosaico {
 		this.filas = filas;
 	}
 
+	/** Devuelve el numero de columnas.
+	 * @return columnas
+	 */
 	private int getColumnas() {
 		return columnas;
 	}
 
+	/** Establece el numero de columnaas, comprendido entre 1 y 5.
+	 * @param columnas Numero de columnas
+	 */
 	private void setColumnas(int columnas) {
 
 		if (columnas < 1 && columnas > 5) {
@@ -149,8 +211,9 @@ public class Mosaico {
 		return resultado;
 	}
 
-	// Método que crea un mosaico de forma manual.
-
+	/**Permite al usuario crear un mosaico
+	 * @return mosaico,
+	 */
 	Figura[][] crear_conf() {
 
 		System.out.println("Introduce el número de filas del mosaico\n(Mínimo 1, Máximo 3)");
@@ -165,69 +228,96 @@ public class Mosaico {
 
 		System.out.println("Introduce el tamaño de las figuras\n(Mínimo 5, Máximo 15)");
 
-		Figura.setTamaño(readRange(5, 15, Rangos.AMBOSIN));
+		Figura.setAltura(readRange(5, 15, Rangos.AMBOSIN));
 
-		for (int i = 0; i < getFilas(); i++) {
+		System.out.println("¿Cuántas figuras vas a introducir?");
+		
+		int numfiguras = readRange(1, getFilas()*getColumnas(), Rangos.AMBOSIN);
+		
+		figuras = new Figura[numfiguras];
+		
+		for (int i = 0; i < figuras.length; i++) {
+			
+			System.out.println("Elige la figura nº " + (i+1));
+			
+			System.out.println("1. Triangulo Superior\n2. Triangulo Inferior\n3. Rombo\n4. Circulo\n5. Cruz");
 
-			for (int j = 0; j < getColumnas(); j++) {
+			int figura_opcion = readRange(1, 5, Rangos.AMBOSIN);
+			
+			switch (figura_opcion) {
 
-				System.out.println("Elige la figura (Fila: " + (i + 1) + ", Columna: " + (j + 1) + ")");
+			case 1:
+				figuras[i] = new TrianguloSuperior();
 
-				System.out.println("1. Triangulo Superior\n2. Triangulo Inferior\n3. Rombo\n4. Circulo\n5. Cruz");
+				break;
 
-				int figura_opcion = readRange(1, 5, Rangos.AMBOSIN);
+			case 2:
+				figuras[i] = new TrianguloInferior();
 
-				Figura figura = null;
+				break;
 
-				switch (figura_opcion) {
+			case 3:
+				figuras[i] = new Rombo();
 
-				case 1:
-					figura = new TrianguloSuperior();
+				break;
 
-					break;
+			case 4:
+				figuras[i] = new Circulo();
 
-				case 2:
-					figura = new TrianguloInferior();
+				break;
 
-					break;
+			case 5:
+				figuras[i] = new Cruz();
 
-				case 3:
-					figura = new Rombo();
-
-					break;
-
-				case 4:
-					figura = new Circulo();
-
-					break;
-
-				case 5:
-					figura = new Cruz();
-
-					break;
-
-				}
-
-				System.out.println("Elige el color de la figura\n1. Rojo\n2. Azul\n3. Verde\n4. Amarillo");
-
-				figura.setColorfigura(readRange(1, 4, Rangos.AMBOSIN));
-
-				System.out.println("Elige el color del fondo\n1. Negro\n2. Morado\n3. Celeste\n4. Blanco");
-
-				figura.setFondo(readRange(1, 4, Rangos.AMBOSIN));
-
-				mosaico[i][j] = figura;
+				break;
 
 			}
+			
+			System.out.println("Elige el color de la figura\n1. Rojo\n2. Azul\n3. Verde\n4. Amarillo");
+
+			figuras[i].setColorfigura(readRange(1, 4, Rangos.AMBOSIN));
+
+			System.out.println("Elige el color del fondo\n1. Negro\n2. Morado\n3. Celeste\n4. Blanco");
+
+			figuras[i].setFondo(readRange(1, 4, Rangos.AMBOSIN));
 
 		}
+		
+		int contador = 0;
+		
+		for (int i = 0; i < getFilas(); i++) {
+			
+			for (int j = 0; j < getColumnas(); j++) {
+				
+				mosaico[i][j] = figuras[contador];
+				
+				if (contador == figuras.length-1) {
+					
+					contador = 0;
+					
+				}
+				
+				else {
+					
+					contador++;
+					
+				}
+				
+			}
+			
+		}
+		
+
+		
+
 
 		return mosaico;
 
 	}
 
-	// Método que crea un mosaico de forma aleatoria.
-
+	/**Crea un mosaico de con parametros aleatorios.
+	 * @return mosaico
+	 */
 	Figura[][] crear_random() {
 
 		Random random = new Random();
@@ -238,63 +328,84 @@ public class Mosaico {
 
 		mosaico = new Figura[getFilas()][getColumnas()];
 
-		int[] posiblestamaños = { 5, 7, 9, 11, 13, 15 };
+		int[] posiblesalturas = { 5, 7, 9, 11, 13, 15 };
 
-		Figura.setTamaño(posiblestamaños[random.nextInt(posiblestamaños.length)]);
+		Figura.setAltura(posiblesalturas[random.nextInt(posiblesalturas.length)]);
+		
+		int numfiguras = random.nextInt(getFilas()*getColumnas())+1;
+		
+		figuras = new Figura[numfiguras];
+		
+		for (int i = 0; i < figuras.length; i++) {
+			
+			int figura_opcion = random.nextInt(5)+1;
+			
+			switch (figura_opcion) {
 
-		for (int i = 0; i < getFilas(); i++) {
+			case 1:
+				figuras[i] = new TrianguloSuperior();
 
-			for (int j = 0; j < getColumnas(); j++) {
+				break;
 
-				int figura_opcion = random.nextInt(5) + 1;
+			case 2:
+				figuras[i] = new TrianguloInferior();
 
-				Figura figura = null;
+				break;
 
-				switch (figura_opcion) {
+			case 3:
+				figuras[i] = new Rombo();
 
-				case 1:
-					figura = new TrianguloSuperior();
+				break;
 
-					break;
+			case 4:
+				figuras[i] = new Circulo();
 
-				case 2:
-					figura = new TrianguloInferior();
+				break;
 
-					break;
+			case 5:
+				figuras[i] = new Cruz();
 
-				case 3:
-					figura = new Rombo();
-
-					break;
-
-				case 4:
-					figura = new Circulo();
-
-					break;
-
-				case 5:
-					figura = new Cruz();
-
-					break;
-
-				}
-
-				figura.setColorfigura(random.nextInt(4) + 1);
-
-				figura.setFondo(random.nextInt(4) + 1);
-
-				mosaico[i][j] = figura;
+				break;
 
 			}
 
+			figuras[i].setColorfigura(random.nextInt(4)+1);
+
+			figuras[i].setFondo(random.nextInt(4)+1);
+
+		}
+		
+		int contador = 0;
+		
+		for (int i = 0; i < getFilas(); i++) {
+			
+			for (int j = 0; j < getColumnas(); j++) {
+				
+				mosaico[i][j] = figuras[contador];
+				
+				if (contador == figuras.length-1) {
+					
+					contador = 0;
+					
+				}
+				
+				else {
+					
+					contador++;
+					
+				}
+				
+			}
+			
 		}
 
 		return mosaico;
 
 	}
 
-	// Método que muestra un mosaico. (En caso de que se haya creado uno).
-
+	/**
+	 * Muestra el mosaico (en caso de que ya se haya creado uno antes)
+	 */
 	void mostrar_mosaico() {
 
 		if (mosaico == null) {
@@ -309,7 +420,7 @@ public class Mosaico {
 
 				int j = 1;
 
-				while (j <= Figura.tamaño) {
+				while (j <= Figura.altura) {
 
 					for (int l = 0; l < getColumnas(); l++) {
 
@@ -328,11 +439,10 @@ public class Mosaico {
 		}
 
 	}
-
-	// Método que clona un mosaico, lo compara con el original, lo modifica, y lo
-	// vuelve a comparar. (En caso de que
-	// se haya creado uno).
-
+	
+	/**
+	 * Clona el mosaico, en caso de ya se haya creado uno antes, y lo compara con el original.
+	 */
 	void clonar_mosaico() {
 
 		if (mosaico == null) {
@@ -356,39 +466,35 @@ public class Mosaico {
 			System.out.println(
 					(this.equals(clon) ? "El mosaico y su clon son iguales" : "El mosaico y su clon NO son iguales"));
 
-			System.out.println("Selecciona una fila\n" + "(Mínimo 1, Máximo " + clon.getFilas() + ")");
+			System.out.println("Selecciona una figura:");
 
-			int i = readRange(1, clon.getFilas(), Rangos.AMBOSIN);
-
-			System.out.println("Selecciona una columna\n(Mínimo 1, Máximo " + clon.getColumnas() + ")");
-
-			int j = readRange(1, clon.getColumnas(), Rangos.AMBOSIN);
-
-			System.out.println("Has seleccionado esta figura (Fila " + i + ", Columna: " + j + ")");
-
-			for (int linea = 0; linea < Figura.getTamaño(); linea++) {
-
-				clon.mosaico[i - 1][j - 1].dibujarFigura(linea);
-
-				System.out.println();
-
+			for (int i = 0; i < figuras.length; i++) {
+				
+				System.out.printf("%d. %s\n", (i+1), figuras[i].info_figura(figuras[i].getColorfigura(), figuras[i].getFondo()));
+				
 			}
+		
+			int opcion = readRange(1, figuras.length, Rangos.AMBOSIN);
+
+			System.out.println("Has seleccionado esta figura:");
+
+			System.out.println(figuras[opcion-1].info_figura(figuras[opcion-1].getColorfigura(), figuras[opcion-1].getFondo()));
 
 			System.out.println("Selecciona un nuevo color para la figura\n1. Rojo\n2. Azul\n3. Verde\n4. Amarillo");
 
-			clon.mosaico[i - 1][j - 1].setColorfigura(readRange(1, 4, Rangos.AMBOSIN));
+			clon.figuras[opcion-1].setColorfigura(readRange(1, 4, Rangos.AMBOSIN));
 
 			System.out.println("Selecciona un nuevo color para el fondo\n1. Negro\n2. Morado\n3. Celeste\n4. Blanco");
 
-			clon.mosaico[i - 1][j - 1].setFondo(readRange(1, 4, Rangos.AMBOSIN));
+			clon.figuras[opcion-1].setFondo(readRange(1, 4, Rangos.AMBOSIN));
 
 			System.out.println("Mosaico original:");
 
-			this.mostrar_mosaico();
+			clon.mostrar_mosaico();
 
 			System.out.println("Mosaico clonado (modificado):");
 
-			clon.mostrar_mosaico();
+			this.mostrar_mosaico();
 
 			System.out.println(
 					(this.equals(clon) ? "El mosaico y su clon son iguales" : "El mosaico y su clon NO son iguales"));
