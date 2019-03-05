@@ -1,4 +1,4 @@
-package clases;
+ package clases;
 
 import static colores.Colores.FONDO_AMARILLO;
 import static colores.Colores.FONDO_AZUL;

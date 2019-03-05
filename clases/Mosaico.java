@@ -18,29 +18,17 @@ public class Mosaico {
 	 */
 	private Figura[][] mosaico;
 
-	/**
-	 * Numero de filas
-	 */
-	private int filas;
-
-	/**
-	 * Numero de columnas.
-	 */
-	private int columnas;
 	
 	/**
 	 * Conjunto de figuras
 	 */
-	private Figura[] figuras;
+	Figura[] figuras;
 
 	// Constructores
 
 	/**
 	 * Constructor por defecto
 	 */
-	Mosaico() {
-
-	}
 
 	/**
 	 * Constructor a partir de las filas, columnas y el mosaico.
@@ -49,52 +37,80 @@ public class Mosaico {
 	 * @param mosaico Mosaico de figuras
 	 * @param figuras Conjunto de figuras seleccionadas
 	 */
-	private Mosaico(int filas, int columnas, Figura[][] mosaico, Figura[] figuras) {
-
-		this.filas = filas;
-
-		this.columnas = columnas;
-
-		this.mosaico = mosaico;
+	 Mosaico(Figura[] figuras, int filas, int columnas) {
 		
 		this.figuras = figuras;
 		
-		
+		crear_mosaico(filas, columnas);
 
 	}
+	 
+	 Mosaico(Mosaico original) {
+
+			this(Arrays.copyOf(original.figuras, original.figuras.length), original.mosaico.length, original.mosaico[0].length);
+
+		}
+	 
+	 private void crear_mosaico(int filas, int columnas) {
+		 
+		 int contador = 0;
+		 
+		 mosaico = new Figura[filas][columnas];
+		 
+		 for (int i = 0; i < mosaico.length; i++) {
+			 
+			 for (int j = 0; j < mosaico[i].length; j++) {
+				 
+				 mosaico[i][j] = figuras[contador];
+				 
+				 if (contador == figuras.length - 1) {
+					 
+					 contador = 0;
+					 
+				 }
+				 
+				 else {
+					 
+					 contador++;
+					 
+				 }
+				 
+			 }
+			 
+		 }
+		 
+	 }
 
 	/** Constructor a partir de otro mosaico
 	 * @param original Mosaico (clonado)
 	 */
-	private Mosaico(Mosaico original) {
-
-		this(original.filas, original.columnas, copiar(original.mosaico, original.filas, original.columnas), Arrays.copyOf(original.figuras,  original.figuras.length));
-
-	}
+	
+	
 
 	
 
-	/** Comprueba si un mosaico es igual a su clon.
-	 * @param mosaico (Mosaico original)
-	 * @param clon (Mosaico clonado)
-	 * @param filas (Numero de filas)
+	/**
+	 * Comprueba si un mosaico es igual a su clon.
+	 * 
+	 * @param mosaico  (Mosaico original)
+	 * @param clon     (Mosaico clonado)
+	 * @param filas    (Numero de filas)
 	 * @param columnas (Numero de columnas)
 	 * @return true (Si todas las celdas son iguales)
 	 */
-	private static boolean comparar_celdas(Figura[][] mosaico, Figura[][] clon, int filas, int columnas) {
+	private boolean comparar_celdas(Mosaico clon) {
 
 		boolean celda_igual = true;
 
-		for (int i = 0; i < filas && celda_igual == true; i++) {
+		for (int i = 0; i < mosaico.length && celda_igual; i++) {
 
-			for (int j = 0; j < columnas && celda_igual == true; j++) {
+			for (int j = 0; j < mosaico[i].length && celda_igual; j++) {
 
-				if (!(clon[i][j].getClass().getSimpleName().equals(mosaico[i][j].getClass().getSimpleName())
-						&& clon[i][j].colorfigura.equals(mosaico[i][j].colorfigura)
-						&& clon[i][j].fondo.equals(mosaico[i][j].fondo))) {
-
+				if (mosaico[i][j].equals(clon.mosaico[i][j]))  {
+					
 					celda_igual = false;
-
+					
+				
 				}
 
 			}
@@ -112,100 +128,60 @@ public class Mosaico {
 	 * @param columnas (Numero de columnas)
 	 * @return (Copia del mosaico)
 	 */
-	private static Figura[][] copiar(Figura[][] original, int filas, int columnas) {
+//	private static Figura[][] copiar(Figura[][] original, int filas, int columnas) {
+//
+//		Figura[][] copia = new Figura[filas][columnas];
+//
+//		for (int i = 0; i < filas; i++) {
+//
+//			for (int j = 0; j < columnas; j++) {
+//
+//				if (original[i][j].getClass().getSimpleName().equals("TrianguloSuperior")) {
+//
+//					copia[i][j] = new TrianguloSuperior(original[i][j]);
+//
+//				}
+//
+//				else if (original[i][j].getClass().getSimpleName().equals("TrianguloInferior")) {
+//
+//					copia[i][j] = new TrianguloInferior(original[i][j]);
+//
+//				}
+//
+//				else if (original[i][j].getClass().getSimpleName().equals("Rombo")) {
+//
+//					copia[i][j] = new Rombo(original[i][j]);
+//
+//				}
+//
+//				else if (original[i][j].getClass().getSimpleName().equals("Circulo")) {
+//
+//					copia[i][j] = new Circulo(original[i][j]);
+//
+//				}
+//
+//				else if (original[i][j].getClass().getSimpleName().equals("Cruz")) {
+//
+//					copia[i][j] = new Cruz(original[i][j]);
+//
+//				}
+//
+//			}
+//
+//		}
+//
+//		return copia;
+//
+//	}
 
-		Figura[][] copia = new Figura[filas][columnas];
-
-		for (int i = 0; i < filas; i++) {
-
-			for (int j = 0; j < columnas; j++) {
-
-				if (original[i][j].getClass().getSimpleName().equals("TrianguloSuperior")) {
-
-					copia[i][j] = new TrianguloSuperior(original[i][j]);
-
-				}
-
-				else if (original[i][j].getClass().getSimpleName().equals("TrianguloInferior")) {
-
-					copia[i][j] = new TrianguloInferior(original[i][j]);
-
-				}
-
-				else if (original[i][j].getClass().getSimpleName().equals("Rombo")) {
-
-					copia[i][j] = new Rombo(original[i][j]);
-
-				}
-
-				else if (original[i][j].getClass().getSimpleName().equals("Circulo")) {
-
-					copia[i][j] = new Circulo(original[i][j]);
-
-				}
-
-				else if (original[i][j].getClass().getSimpleName().equals("Cruz")) {
-
-					copia[i][j] = new Cruz(original[i][j]);
-
-				}
-
-			}
-
-		}
-
-		return copia;
-
-	}
-
-	/**Devuelve el numero de filas.
-	 * @return filas
-	 */
-	private int getFilas() {
-		return filas;
-	}
-
-	/**Establece el numero de filas, comprendido entre 1 y 3.
-	 * @param filas Numero de filas.
-	 */
-	private void setFilas(int filas) {
-
-		if (filas < 1 && filas > 3) {
-
-			throw new IllegalArgumentException("Debe haber, como mínimo, una fila y, como maximo, 3");
-
-		}
-
-		this.filas = filas;
-	}
-
-	/** Devuelve el numero de columnas.
-	 * @return columnas
-	 */
-	private int getColumnas() {
-		return columnas;
-	}
-
-	/** Establece el numero de columnaas, comprendido entre 1 y 5.
-	 * @param columnas Numero de columnas
-	 */
-	private void setColumnas(int columnas) {
-
-		if (columnas < 1 && columnas > 5) {
-
-			throw new IllegalArgumentException("Debe haber, como mínimo, una columna, y como maximo, 5");
-
-		}
-
-		this.columnas = columnas;
-	}
+	
 
 	// Método equals de la clase Mosaico.
 
 	public boolean equals(Object obj) {
 		boolean resultado = false;
-		if (obj instanceof Mosaico && comparar_celdas(mosaico, ((Mosaico) obj).mosaico, filas, columnas)
-				&& filas == ((Mosaico) obj).filas && columnas == ((Mosaico) obj).columnas) {
+		if (obj instanceof Mosaico && comparar_celdas((Mosaico)obj))
+		 {
 			resultado = true;
 		}
 		return resultado;
@@ -230,7 +206,7 @@ public class Mosaico {
 
 		Figura.setAltura(readRange(5, 15, Rangos.AMBOSIN));
 
-		System.out.println("¿Cuántas figuras vas a introducir?");
+		System.out.println("¿Cuántas figuras vas a introducir?\n(Mínimo 1, Máximo: " + (getFilas()*getColumnas() +")"));
 		
 		int numfiguras = readRange(1, getFilas()*getColumnas(), Rangos.AMBOSIN);
 		
@@ -455,7 +431,7 @@ public class Mosaico {
 
 			System.out.println("Mosaico original:");
 
-			this.mostrar_mosaico();
+			mostrar_mosaico();
 
 			Mosaico clon = new Mosaico(this);
 
@@ -490,11 +466,11 @@ public class Mosaico {
 
 			System.out.println("Mosaico original:");
 
-			clon.mostrar_mosaico();
+			mostrar_mosaico();
 
 			System.out.println("Mosaico clonado (modificado):");
 
-			this.mostrar_mosaico();
+			clon.mostrar_mosaico();
 
 			System.out.println(
 					(this.equals(clon) ? "El mosaico y su clon son iguales" : "El mosaico y su clon NO son iguales"));
