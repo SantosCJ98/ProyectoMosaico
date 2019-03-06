@@ -12,8 +12,6 @@ import colores.ColoresEnum;
  */
 public class Circulo extends Figura {
 
-	// Constructores
-
 	/**
 	 * Constructor por defecto.
 	 */
@@ -43,7 +41,7 @@ public class Circulo extends Figura {
 
 	}
 
-	// Método que dibuja un círculo (según la linea pasada por parámetro).
+	// Metodo que dibuja un círculo (segun la linea pasada por parametro).
 
 	protected void dibujarFigura(int linea) {
 
