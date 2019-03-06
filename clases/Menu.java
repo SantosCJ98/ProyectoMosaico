@@ -277,7 +277,15 @@ public class Menu {
 
 			int opcion = readRange(1, m.figuras.length, Rangos.AMBOSIN);
 
-			System.out.println("Has seleccionado esta figura: " + m.figuras[opcion - 1].info_figura());
+			System.out.println("Has seleccionado la figura nº " + opcion + " (" + m.figuras[opcion - 1].info_figura() + ")");
+			
+			for (int linea = 1; linea <= Figura.getAltura(); linea++) {
+				
+				m.figuras[opcion - 1].dibujarFigura(linea);
+				
+				System.out.println();
+				
+			}
 
 			System.out.println("Selecciona un nuevo color para la figura\n1. Rojo\n2. Azul\n3. Verde\n4. Amarillo");
 
