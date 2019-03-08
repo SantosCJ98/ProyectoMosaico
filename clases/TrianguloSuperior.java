@@ -4,7 +4,9 @@ import static colores.Colores.*;
 
 import colores.ColoresEnum;
 
-/**Esta clase crea triangulos superiores.
+/**
+ * Esta clase crea triangulos superiores.
+ * 
  * @author Santos CJ
  * @version 1.0
  * @since 1.0
@@ -13,31 +15,24 @@ import colores.ColoresEnum;
 
 public class TrianguloSuperior extends Figura {
 
-	//Constructores
-	
-		/**
-		 * Constructor por defecto.
-		 */
+	// Constructores
 
-	protected TrianguloSuperior() {
-
-	}
-	
 	/**
 	 * Constructor a partir de los colores.
+	 * 
 	 * @param colorfigura Color de la figura.
-	 * @param fondo	Color del fondo.
+	 * @param fondo       Color del fondo.
 	 */
 
 	protected TrianguloSuperior(ColoresEnum colorfigura, ColoresEnum fondo) {
 
-		this.colorfigura = colorfigura;
-
-		this.fondo = fondo;
+		super(colorfigura, fondo);
 
 	}
-	
-	/**Contructor a partir de otro objeto de la misma clase (clonador)
+
+	/**
+	 * Contructor a partir de otro objeto de la misma clase (clonador)
+	 * 
 	 * @param original Objeto a clonar
 	 */
 

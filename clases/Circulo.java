@@ -4,7 +4,9 @@ import static colores.Colores.*;
 
 import colores.ColoresEnum;
 
-/**Esta clase crea circulos.
+/**
+ * Esta clase crea circulos.
+ * 
  * @author Santos CJ
  * @version 1.0
  * @since 1.0
@@ -13,26 +15,20 @@ import colores.ColoresEnum;
 public class Circulo extends Figura {
 
 	/**
-	 * Constructor por defecto.
+	 * Constructor a partir de los colores.
+	 * 
+	 * @param colorfigura Color de la figura.
+	 * @param fondo       Color del fondo.
 	 */
-	protected Circulo() {
+	protected Circulo(ColoresEnum colorfigura, ColoresEnum fondo) {
+
+		super(colorfigura, fondo);
 
 	}
 
 	/**
-	 * Constructor a partir de los colores.
-	 * @param colorfigura Color de la figura.
-	 * @param fondo	Color del fondo.
-	 */
-	protected Circulo(ColoresEnum colorfigura, ColoresEnum fondo) {
-
-		this.colorfigura = colorfigura;
-
-		this.fondo = fondo;
-
-	}
-
-	/**Contructor a partir de otro objeto de la misma clase (clonador)
+	 * Contructor a partir de otro objeto de la misma clase (clonador)
+	 * 
 	 * @param original Objeto a clonar
 	 */
 	protected Circulo(Figura original) {

@@ -24,8 +24,8 @@ public class Mosaico {
 	/**
 	 * Constructor del mosaico
 	 * 
-	 * @param figuras Conjunto de figuras
-	 * @param filas Filas del mosaico
+	 * @param figuras  Conjunto de figuras
+	 * @param filas    Filas del mosaico
 	 * @param columnas Columnas del mosaico
 	 */
 	Mosaico(Figura[] figuras, int filas, int columnas) {
@@ -43,23 +43,24 @@ public class Mosaico {
 	 */
 	Mosaico(Mosaico original) {
 
-		this(copiar_figuras(original.figuras, original.figuras.length), original.mosaico.length,
-				original.mosaico[0].length);
+		figuras = copiar_figuras(original.figuras);
+
+		crear_mosaico(original.mosaico.length, original.mosaico[0].length);
 
 	}
 
 	/**
-	 * Metodo que realiza una copia del array de figuras en otra direccion de memoria.
+	 * Metodo que realiza una copia del array de figuras en otra direccion de
+	 * memoria.
 	 * 
 	 * @param original Array de figuras original
-	 * @param longitud Longitud del array
 	 * @return copia Copia del array de figuras
 	 */
-	private static Figura[] copiar_figuras(Figura[] original, int longitud) {
+	private static Figura[] copiar_figuras(Figura[] original) {
 
-		Figura[] copia = new Figura[longitud];
+		Figura[] copia = new Figura[original.length];
 
-		for (int i = 0; i < longitud; i++) {
+		for (int i = 0; i < copia.length; i++) {
 
 			if (original[i] instanceof TrianguloSuperior) {
 
@@ -100,7 +101,7 @@ public class Mosaico {
 	/**
 	 * Metodo que crea el mosaico
 	 * 
-	 * @param filas Filas del mosaico
+	 * @param filas    Filas del mosaico
 	 * @param columnas Columnas del mosaico
 	 */
 	private void crear_mosaico(int filas, int columnas) {
@@ -147,10 +148,7 @@ public class Mosaico {
 
 			for (int j = 0; j < mosaico[i].length && celda_igual; j++) {
 
-				if (!(mosaico[i][j].getClass().equals(clon.mosaico[i][j].getClass())
-						&& mosaico[i][j].colorfigura.equals(clon.mosaico[i][j].colorfigura)
-						&& mosaico[i][j].fondo.equals(clon.mosaico[i][j].fondo))) {
-
+				if (!(((Figura) mosaico[i][j]).equals(((Figura) clon.mosaico[i][j])))) {
 					celda_igual = false;
 
 				}

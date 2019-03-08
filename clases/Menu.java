@@ -4,6 +4,7 @@ import static teclado.Teclado.*;
 
 import java.util.Random;
 
+import colores.ColoresEnum;
 import teclado.Teclado.Rangos;
 
 /**
@@ -19,7 +20,8 @@ public class Menu {
 	Mosaico m;
 
 	/**
-	 * Menu desde donde se utiliza el programa para crear, mostrar y clonar mosaicos.
+	 * Menu desde donde se utiliza el programa para crear, mostrar y clonar
+	 * mosaicos.
 	 */
 	public void menu_principal() {
 
@@ -106,6 +108,10 @@ public class Menu {
 
 		int numfiguras = 0;
 
+		ColoresEnum color_figura = null;
+
+		ColoresEnum fondo = null;
+
 		System.out.println("Introduce el número de filas del mosaico\n(Mínimo 1, Máximo 3)");
 
 		filas = readRange(1, 3, Rangos.AMBOSIN);
@@ -132,42 +138,90 @@ public class Menu {
 
 			int figura_opcion = readRange(1, 5, Rangos.AMBOSIN);
 
-			switch (figura_opcion) {
+			System.out.println("Elige el color de la figura\n1. Rojo\n2. Azul\n3. Verde\n4. Amarillo");
+
+			int colorfigura = readRange(1, 4, Rangos.AMBOSIN);
+
+			switch (colorfigura) {
 
 			case 1:
-				figuras[i] = new TrianguloSuperior();
+				color_figura = color_figura.ROJO;
 
 				break;
 
 			case 2:
-				figuras[i] = new TrianguloInferior();
+				color_figura = color_figura.AZUL;
 
 				break;
 
 			case 3:
-				figuras[i] = new Rombo();
+				color_figura = color_figura.VERDE;
 
 				break;
 
 			case 4:
-				figuras[i] = new Circulo();
-
-				break;
-
-			case 5:
-				figuras[i] = new Cruz();
+				color_figura = color_figura.AMARILLO;
 
 				break;
 
 			}
 
-			System.out.println("Elige el color de la figura\n1. Rojo\n2. Azul\n3. Verde\n4. Amarillo");
-
-			figuras[i].setColorfigura(readRange(1, 4, Rangos.AMBOSIN));
-
 			System.out.println("Elige el color del fondo\n1. Negro\n2. Morado\n3. Celeste\n4. Blanco");
 
-			figuras[i].setFondo(readRange(1, 4, Rangos.AMBOSIN));
+			int colorfondo = readRange(1, 4, Rangos.AMBOSIN);
+
+			switch (colorfondo) {
+
+			case 1:
+				fondo = fondo.NEGRO;
+
+				break;
+
+			case 2:
+				fondo = fondo.MORADO;
+
+				break;
+
+			case 3:
+				fondo = fondo.CELESTE;
+
+				break;
+
+			case 4:
+				fondo = fondo.BLANCO;
+
+				break;
+
+			}
+
+			switch (figura_opcion) {
+
+			case 1:
+				figuras[i] = new TrianguloSuperior(color_figura, fondo);
+
+				break;
+
+			case 2:
+				figuras[i] = new TrianguloInferior(color_figura, fondo);
+
+				break;
+
+			case 3:
+				figuras[i] = new Rombo(color_figura, fondo);
+
+				break;
+
+			case 4:
+				figuras[i] = new Circulo(color_figura, fondo);
+
+				break;
+
+			case 5:
+				figuras[i] = new Cruz(color_figura, fondo);
+
+				break;
+
+			}
 
 		}
 
@@ -188,6 +242,10 @@ public class Menu {
 
 		int numfiguras = 0;
 
+		ColoresEnum color_figura = null;
+
+		ColoresEnum fondo = null;
+
 		Figura[] figuras;
 
 		filas = random.nextInt(3) + 1;
@@ -206,38 +264,86 @@ public class Menu {
 
 			int figura_opcion = random.nextInt(5) + 1;
 
-			switch (figura_opcion) {
+			int colorfigura = random.nextInt(4) + 1;
+
+			int colorfondo = random.nextInt(4) + 1;
+
+			switch (colorfigura) {
 
 			case 1:
-				figuras[i] = new TrianguloSuperior();
+				color_figura = color_figura.ROJO;
 
 				break;
 
 			case 2:
-				figuras[i] = new TrianguloInferior();
+				color_figura = color_figura.AZUL;
 
 				break;
 
 			case 3:
-				figuras[i] = new Rombo();
+				color_figura = color_figura.VERDE;
 
 				break;
 
 			case 4:
-				figuras[i] = new Circulo();
-
-				break;
-
-			case 5:
-				figuras[i] = new Cruz();
+				color_figura = color_figura.AMARILLO;
 
 				break;
 
 			}
 
-			figuras[i].setColorfigura(random.nextInt(4) + 1);
+			switch (colorfondo) {
 
-			figuras[i].setFondo(random.nextInt(4) + 1);
+			case 1:
+				fondo = fondo.NEGRO;
+
+				break;
+
+			case 2:
+				fondo = fondo.MORADO;
+
+				break;
+
+			case 3:
+				fondo = fondo.CELESTE;
+
+				break;
+
+			case 4:
+				fondo = fondo.BLANCO;
+
+				break;
+
+			}
+
+			switch (figura_opcion) {
+
+			case 1:
+				figuras[i] = new TrianguloSuperior(color_figura, fondo);
+
+				break;
+
+			case 2:
+				figuras[i] = new TrianguloInferior(color_figura, fondo);
+
+				break;
+
+			case 3:
+				figuras[i] = new Rombo(color_figura, fondo);
+
+				break;
+
+			case 4:
+				figuras[i] = new Circulo(color_figura, fondo);
+
+				break;
+
+			case 5:
+				figuras[i] = new Cruz(color_figura, fondo);
+
+				break;
+
+			}
 
 		}
 
@@ -270,21 +376,21 @@ public class Menu {
 
 			for (int i = 0; i < m.figuras.length; i++) {
 
-				System.out.printf("%d. %s\n", (i + 1),
-						m.figuras[i].info_figura());
+				System.out.printf("%d. %s\n", (i + 1), m.figuras[i].info_figura());
 
 			}
 
 			int opcion = readRange(1, m.figuras.length, Rangos.AMBOSIN);
 
-			System.out.println("Has seleccionado la figura nº " + opcion + " (" + m.figuras[opcion - 1].info_figura() + ")");
-			
+			System.out.println(
+					"Has seleccionado la figura nº " + opcion + " (" + m.figuras[opcion - 1].info_figura() + ")");
+
 			for (int linea = 1; linea <= Figura.getAltura(); linea++) {
-				
+
 				m.figuras[opcion - 1].dibujarFigura(linea);
-				
+
 				System.out.println();
-				
+
 			}
 
 			System.out.println("Selecciona un nuevo color para la figura\n1. Rojo\n2. Azul\n3. Verde\n4. Amarillo");

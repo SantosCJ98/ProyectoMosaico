@@ -12,6 +12,22 @@ import colores.ColoresEnum;
 public abstract class Figura {
 
 	/**
+	 * Color de la figura
+	 */
+	protected ColoresEnum colorfigura;
+
+	/**
+	 * Color del fondo.
+	 */
+	protected ColoresEnum fondo;
+
+	/**
+	 * Altura de todas las figuras.
+	 */
+
+	protected static int altura;
+
+	/**
 	 * Este metodo dibuja la figura.
 	 * 
 	 * @param linea La linea que dibuja la figura.
@@ -19,18 +35,20 @@ public abstract class Figura {
 
 	protected abstract void dibujarFigura(int linea);
 
-	/**
-	 * Constructor por defecto
-	 */
-	protected Figura() {
+	public boolean equals(Object obj) {
+		boolean resultado = false;
+		if (obj instanceof Figura && ((Figura) obj).colorfigura == colorfigura && ((Figura) obj).fondo == fondo) {
+			resultado = true;
+		}
 
+		return resultado;
 	}
 
 	/**
 	 * Constructor a partir de los colores.
 	 * 
 	 * @param colorfigura Color de la figura
-	 * @param fondo Color del fondo.
+	 * @param fondo       Color del fondo.
 	 */
 	protected Figura(ColoresEnum colorfigura, ColoresEnum fondo) {
 
@@ -50,21 +68,6 @@ public abstract class Figura {
 		this(original.colorfigura, original.fondo);
 
 	}
-
-	/**
-	 * Color de la figura
-	 */
-	protected ColoresEnum colorfigura;
-
-	/**
-	 * Color del fondo.
-	 */
-	protected ColoresEnum fondo;
-
-	/**
-	 * Altura de todas las figuras.
-	 */
-	protected static int altura;
 
 	/**
 	 * @param eleccion Color que se asigna a una figura (1 = Rojo, 2 = Azul, 3 =
@@ -188,32 +191,33 @@ public abstract class Figura {
 
 	/**
 	 * Muestra informacion sobre una figura.
+	 * 
 	 * @return Tipo de la figura junto a su color y color de fondo en una cadena
 	 */
 	protected String info_figura() {
 
 		String figura;
 
-
 		if (this instanceof TrianguloSuperior) {
 
 			figura = "Triangulo Superior";
 
 		}
-		
+
 		else if (this instanceof TrianguloInferior) {
-			
+
 			figura = "Triangulo Inferior";
-			
+
 		}
 
 		else {
-			
+
 			figura = getClass().getSimpleName();
-			
+
 		}
 
-		return String.format("%s %s con fondo %s", figura, getColorfigura().toString().toLowerCase(), getFondo().toString().toLowerCase());
+		return String.format("%s %s con fondo %s", figura, getColorfigura().toString().toLowerCase(),
+				getFondo().toString().toLowerCase());
 	}
 
 }
