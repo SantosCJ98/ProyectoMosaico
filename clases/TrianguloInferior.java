@@ -40,6 +40,15 @@ public class TrianguloInferior extends Figura {
 
 		this(original.colorfigura, original.fondo);
 	}
+	
+	public boolean equals(Object obj) {
+		boolean resultado = false;
+		if (obj instanceof TrianguloInferior && ((Figura) obj).colorfigura == colorfigura && ((Figura) obj).fondo == fondo) {
+			resultado = true;
+		}
+
+		return resultado;
+	}
 
 	// Método que dibuja un triángulo inferior (según la línea)
 

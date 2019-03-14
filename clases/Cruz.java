@@ -53,6 +53,15 @@ public class Cruz extends Figura {
 		this(original.colorfigura, original.fondo);
 
 	}
+	
+	public boolean equals(Object obj) {
+		boolean resultado = false;
+		if (obj instanceof Cruz && ((Figura) obj).colorfigura == colorfigura && ((Figura) obj).fondo == fondo) {
+			resultado = true;
+		}
+
+		return resultado;
+	}
 
 	// Método que dibuja una cruz. (Según la linea).
 

@@ -107,5 +107,14 @@ public class TrianguloSuperior extends Figura {
 		}
 
 	}
+	
+	public boolean equals(Object obj) {
+		boolean resultado = false;
+		if (obj instanceof TrianguloSuperior && ((Figura) obj).colorfigura == colorfigura && ((Figura) obj).fondo == fondo) {
+			resultado = true;
+		}
+
+		return resultado;
+	}
 
 }

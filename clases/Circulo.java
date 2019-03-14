@@ -36,6 +36,15 @@ public class Circulo extends Figura {
 		this(original.colorfigura, original.fondo);
 
 	}
+	
+	public boolean equals(Object obj) {
+		boolean resultado = false;
+		if (obj instanceof Circulo && ((Figura) obj).colorfigura == colorfigura && ((Figura) obj).fondo == fondo) {
+			resultado = true;
+		}
+
+		return resultado;
+	}
 
 	// Metodo que dibuja un círculo (segun la linea pasada por parametro).
 

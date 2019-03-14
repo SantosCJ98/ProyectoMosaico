@@ -32,18 +32,7 @@ public abstract class Figura {
 	 * 
 	 * @param linea La linea que dibuja la figura.
 	 */
-
-	protected abstract void dibujarFigura(int linea);
-
-	public boolean equals(Object obj) {
-		boolean resultado = false;
-		if (obj instanceof Figura && ((Figura) obj).colorfigura == colorfigura && ((Figura) obj).fondo == fondo) {
-			resultado = true;
-		}
-
-		return resultado;
-	}
-
+	
 	/**
 	 * Constructor a partir de los colores.
 	 * 
@@ -68,6 +57,19 @@ public abstract class Figura {
 		this(original.colorfigura, original.fondo);
 
 	}
+
+	protected abstract void dibujarFigura(int linea);
+
+	public boolean equals(Object obj) {
+		boolean resultado = false;
+		if (obj instanceof Figura && ((Figura) obj).colorfigura == colorfigura && ((Figura) obj).fondo == fondo) {
+			resultado = true;
+		}
+
+		return resultado;
+	}
+
+	
 
 	/**
 	 * @param eleccion Color que se asigna a una figura (1 = Rojo, 2 = Azul, 3 =

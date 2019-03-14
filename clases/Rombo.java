@@ -33,6 +33,15 @@ public class Rombo extends Figura {
 		this(original.colorfigura, original.fondo);
 
 	}
+	
+	public boolean equals(Object obj) {
+		boolean resultado = false;
+		if (obj instanceof Rombo && ((Figura) obj).colorfigura == colorfigura && ((Figura) obj).fondo == fondo) {
+			resultado = true;
+		}
+
+		return resultado;
+	}
 
 	// Metodo que dibuja un rombo (según la linea)
 
